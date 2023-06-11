@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{f697d31b-8482-4b22-bbad-f912a407f41d}">
+		<property name="name">
+			<value>LockedFX</value>
+		</property>
+		<relationship name="folder">
+			<destination>{bbf4166c-14ea-4b21-a32c-740fe58ec25d}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{3ee791af-df65-498e-b1bb-99f4ff678e74}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{3ee791af-df65-498e-b1bb-99f4ff678e74}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

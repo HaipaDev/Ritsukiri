@@ -32,6 +32,8 @@ MonoBehaviour:
     assemblyNames:
     - AllIn1SpriteShaderAssembly
     - Assembly-CSharp
+    - FMODUnity
+    - FMODUnityResonance
     - UnityUIExtensions
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0

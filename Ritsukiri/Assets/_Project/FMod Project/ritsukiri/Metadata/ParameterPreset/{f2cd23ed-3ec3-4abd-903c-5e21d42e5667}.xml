@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{f2cd23ed-3ec3-4abd-903c-5e21d42e5667}">
+		<property name="name">
+			<value>GoodHitWindow</value>
+		</property>
+		<relationship name="folder">
+			<destination>{bbf4166c-14ea-4b21-a32c-740fe58ec25d}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{04114418-6a27-4bc5-b35e-1c2bd772d4d4}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{04114418-6a27-4bc5-b35e-1c2bd772d4d4}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>
