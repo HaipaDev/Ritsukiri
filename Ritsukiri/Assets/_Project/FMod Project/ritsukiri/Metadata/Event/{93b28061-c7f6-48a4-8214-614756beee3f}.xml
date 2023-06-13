@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{93b28061-c7f6-48a4-8214-614756beee3f}">
 		<property name="name">
-			<value>BGMusic</value>
+			<value>BGLoop120</value>
 		</property>
 		<property name="outputFormat">
 			<value>0</value>

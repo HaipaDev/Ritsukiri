@@ -27,7 +27,7 @@ MonoBehaviour:
   - {fileID: 2508702817042203553}
   MinDistance: 1
   MaxDistance: 20
-  Length: 347
+  Length: 470
 --- !u!114 &-9023429242930678014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
   - {fileID: -6995936422444798883}
   MinDistance: 1
   MaxDistance: 20
-  Length: 342
+  Length: 560
 --- !u!114 &-6995936422444798883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,10 +94,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Drum4
   Guid:
-    Data1: -1611682845
-    Data2: 1319564625
-    Data3: -1436679768
-    Data4: -1493462915
+    Data1: -141428438
+    Data2: 1112845246
+    Data3: -947805512
+    Data4: -2088477329
   Banks:
   - {fileID: 651444967148601427}
   IsStream: 0
@@ -107,7 +107,7 @@ MonoBehaviour:
   - {fileID: 383389200739870155}
   MinDistance: 1
   MaxDistance: 20
-  Length: 341
+  Length: 479
 --- !u!114 &-4429982509697689891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,43 +156,15 @@ MonoBehaviour:
   - {fileID: -9023601236782460442}
   - {fileID: -4429982509697689891}
   - {fileID: -4840162060711337783}
-  - {fileID: 196349580069822621}
+  - {fileID: 606820749937462817}
   EditorParameters:
   - {fileID: 1888744704977143056}
   MasterBanks:
   - {fileID: 651444967148601427}
   StringsBanks:
   - {fileID: 8659133508284032180}
-  cacheTime: 638221278751425881
+  cacheTime: 638222886749364133
   cacheVersion: 131603
---- !u!114 &196349580069822621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/BGMusic
-  m_EditorClassIdentifier: 
-  Path: event:/BGMusic
-  Guid:
-    Data1: -1817018271
-    Data2: 1218758646
-    Data3: 1197544578
-    Data4: 1072610902
-  Banks:
-  - {fileID: 651444967148601427}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 7639477839155309762}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 500
 --- !u!114 &383389200739870155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,6 +189,34 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &606820749937462817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BGLoop120
+  m_EditorClassIdentifier: 
+  Path: event:/BGLoop120
+  Guid:
+    Data1: -1817018271
+    Data2: 1218758646
+    Data3: 1197544578
+    Data4: 1072610902
+  Banks:
+  - {fileID: 651444967148601427}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 1669804004676469582}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
 --- !u!114 &651444967148601427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,10 +232,34 @@ MonoBehaviour:
   Path: Assets/_Project/FMod Project/ritsukiri/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638221278751395884
+  lastModified: 638222886749314022
   FileSizes:
   - Name: Desktop
-    Value: 37888
+    Value: 62432
+  Exists: 1
+--- !u!114 &1669804004676469582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/BGLoop120/LockedFX
+  m_EditorClassIdentifier: 
+  Name: LockedFX
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2890134338
+    data2: 3087853996
+  Type: 0
+  IsGlobal: 0
+  Labels: []
   Exists: 1
 --- !u!114 &1888744704977143056
 MonoBehaviour:
@@ -325,10 +349,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Drum3
   Guid:
-    Data1: -141428438
-    Data2: 1112845246
-    Data3: -947805512
-    Data4: -2088477329
+    Data1: -1611682845
+    Data2: 1319564625
+    Data3: -1436679768
+    Data4: -1493462915
   Banks:
   - {fileID: 651444967148601427}
   IsStream: 0
@@ -338,31 +362,7 @@ MonoBehaviour:
   - {fileID: 6348752122713810987}
   MinDistance: 1
   MaxDistance: 20
-  Length: 341
---- !u!114 &7639477839155309762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/BGMusic/LockedFX
-  m_EditorClassIdentifier: 
-  Name: LockedFX
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2890134338
-    data2: 3087853996
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
+  Length: 453
 --- !u!114 &8659133508284032180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,8 +378,8 @@ MonoBehaviour:
   Path: Assets/_Project/FMod Project/ritsukiri/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638221278751425881
+  lastModified: 638222886749364133
   FileSizes:
   - Name: Desktop
-    Value: 1098
+    Value: 1100
   Exists: 1

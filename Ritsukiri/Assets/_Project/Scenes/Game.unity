@@ -482,8 +482,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f085c99a5231ccd4c90a04587c112766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgLoops:
+  - eventName: event:/BGLoop120
+    bpm: 120
+  bgLoopCurrentId: 0
   bgLoop:
-    eventName: event:/BGMusic
+    eventName: event:/BGLoop120
+    bpm: 120
   bpm: 120
   secBetweenBeats: 0.5
   beatsPerSec: 2
@@ -492,15 +497,26 @@ MonoBehaviour:
   - eventName: event:/Drum2
   - eventName: event:/Drum3
   - eventName: event:/Drum4
+  drumImgs:
+  - {fileID: 4966215842435052633, guid: 71f6ac95721d44e45b4cade9578bbfd0, type: 3}
+  - {fileID: 959796421010481409, guid: 4f18f12294b061f448a432c988b64bfc, type: 3}
+  - {fileID: 2750606743755084401, guid: b768d09eef97c1f41840586444330f65, type: 3}
+  - {fileID: 6015409050412015123, guid: 08897878d6c8ab945acb2871d6d6a662, type: 3}
+  centerPosForDrumImgs: {x: 0, y: 0}
   clickSound:
     eventName: event:/ComboClick
+  canvasParent: {fileID: 665595496}
   bgImg: {fileID: 2055140470}
   img: {fileID: 269285108}
   defaultSpr: {fileID: 21300000, guid: 4f57edfd05fb84842bc00ccb7e372e50, type: 3}
   lockedSpr: {fileID: 21300000, guid: bf5caf0053b7a174d8467b6165d53b6c, type: 3}
+  _debugColors: 0
   inputLocked: 0
   hitWindowState: 0
   actionHistory: ffffffffffffffffffffffffffffffff
+  commandNotPerfect: 0
+  commandNotPerfectCount: 0
+  comboStatus: 0
   bgColorDefault: {r: 0.5137255, g: 0.3019608, b: 0.76862746, a: 1}
   bgColorUnlocked: {r: 0.34219187, g: 0.74902, b: 0.30036843, a: 1}
   bgColorGood: {r: 0.9882353, g: 0.9372549, b: 0.5529412, a: 1}
