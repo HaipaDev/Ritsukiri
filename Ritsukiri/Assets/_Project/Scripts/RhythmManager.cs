@@ -28,6 +28,7 @@ public class RhythmManager : MonoBehaviour{
     [ChildGameObjectsOnly][SerializeField] Transform drumImgsParent;
     [ChildGameObjectsOnly][SerializeField] Image bgImg;
     [ChildGameObjectsOnly][SerializeField] Image bgFeverImg;
+    [ChildGameObjectsOnly][SerializeField] Image bgMugenImg;
     [ChildGameObjectsOnly][SerializeField] Image frameImg;
     [ChildGameObjectsOnly][SerializeField] Transform comboBarParent;
     [ChildGameObjectsOnly][SerializeField] Image comboBarGekka;
@@ -40,7 +41,6 @@ public class RhythmManager : MonoBehaviour{
 
     [SerializeField] Sprite defaultSpr;
     [SerializeField] Sprite lockedSpr;
-    [SerializeField]Color colorFever=new Color(244f/255f,147f/255f,115f/255f);
     [SerializeField]Color colorPerfect=new Color(141f/255f,183f/255f,255f/255f);
     [SerializeField]Color colorGood=new Color(252f/255f,239f/255f,141f/255f);
     [SerializeField] bool _debug;
@@ -57,9 +57,10 @@ public class RhythmManager : MonoBehaviour{
     [DisableInEditorMode][SerializeField] int comboStatus;
     [DisableInEditorMode][SerializeField] float feverPower;
     [DisableInEditorMode][SerializeField] int mashingCount;
-    [DisableInEditorMode][SerializeField]float _timeElapsed,_timeElapsedOverflow,_timeElapsedBetweenInputs,_timeElapsedBetweenCommands,_timeElapsedLocked,_lockedTime,_feverTimer;
+    [DisableInEditorMode][SerializeField]float _timeElapsed,_timeElapsedOverflow,_timeElapsedBetweenInputs,_timeElapsedBetweenCommands,_timeElapsedLocked,_lockedTime,_feverTimer,_mugenStartFeverTime;
     [DisableInEditorMode][SerializeField]Color frameImgColor=Color.white;
 
+    Color _colorTransparent=new Color(1,1,1,0);
     void Start(){
         perfectSound.CreateInstance();
         feverSound.CreateInstance();
@@ -68,12 +69,15 @@ public class RhythmManager : MonoBehaviour{
         specialSound.CreateInstance();
         foreach(FModEventSound s in drumSounds){s.CreateInstance();}
 
-        colorFever=new Color(244f/255f,147f/255f,115f/255f);
         colorPerfect=new Color(141f/255f,183f/255f,255f/255f);
         colorGood=new Color(252f/255f,239f/255f,141f/255f);
-        bgFeverImg.color=new Color(1,1,1,0);
+        bgFeverImg.color=_colorTransparent;
+        foreach(Image i in bgFeverImg.transform.GetComponentsInChildren<Image>()){i.GetComponent<Image>().color=_colorTransparent;}
+        bgMugenImg.color=_colorTransparent;
         comboBarParent.gameObject.SetActive(false);
         comboBarGekka.gameObject.SetActive(false);
+        comboBarFillFull.gameObject.SetActive(false);
+        comboBarFillFull.color=_colorTransparent;
         comboBarMugen.gameObject.SetActive(false);
         
         LockInput(false);
@@ -89,15 +93,27 @@ public class RhythmManager : MonoBehaviour{
         bgLoop.eventInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE _state);
         if(_state==FMOD.Studio.PLAYBACK_STATE.PLAYING){
             CheckRhythm();
-            float _normalizedTime=_timeElapsed/secBetweenBeats;//Debug.Log(_timeElapsed+" | "+_normalizedTime);
-            frameImg.color=Color.Lerp(new Color(frameImgColor.r,frameImgColor.g,frameImgColor.b,1), new Color(frameImgColor.r,frameImgColor.g,frameImgColor.b,0), _normalizedTime);
+            float _normalizedBeatTime=_timeElapsed/secBetweenBeats;//Debug.Log(_timeElapsed+" | "+_normalizedTime);
+            frameImg.color=Color.Lerp(new Color(frameImgColor.r,frameImgColor.g,frameImgColor.b,1), new Color(frameImgColor.r,frameImgColor.g,frameImgColor.b,0), _normalizedBeatTime);
             if(!inputLocked){frameImg.sprite=defaultSpr;}else{frameImg.sprite=lockedSpr;frameImgColor=Color.white;}
 
             float _normalizedfeverTimer=_feverTimer/(secBetweenBeats*3);
-            //if(comboStatus==-1){bgColor=bgColorFever;}else{bgColor=bgColorDefault;}
-            //bgImg.color=Color.Lerp(bgImg.color,bgColor,_normalizedfeverTimer);
-            if(comboStatus==-1){bgFeverImg.color=Color.Lerp(new Color(1,1,1,bgFeverImg.color.a), new Color(1,1,1,1), _normalizedfeverTimer);}
-            else{bgFeverImg.color=Color.Lerp(new Color(1,1,1,bgFeverImg.color.a), new Color(1,1,1,0), _normalizedfeverTimer);}
+            if(comboStatus==-1){
+                bgFeverImg.color=Color.Lerp(new Color(1,1,1,bgFeverImg.color.a), Color.white, _normalizedfeverTimer);
+                bgFeverImg.transform.GetComponentInChildren<Image>().color=Color.Lerp(new Color(1,1,1,bgFeverImg.color.a), Color.white, _normalizedfeverTimer);
+                //foreach(Transform t in bgFeverImg.transform){if(t.GetComponent<Image>()!=null){t.GetComponent<Image>().color=Color.Lerp(new Color(1,1,1,bgFeverImg.color.a), Color.white, _normalizedfeverTimer);}}
+            }
+            else{
+                bgFeverImg.color=Color.Lerp(new Color(1,1,1,bgFeverImg.color.a), _colorTransparent, _normalizedfeverTimer);
+                bgFeverImg.transform.GetComponentInChildren<Image>().color=Color.Lerp(new Color(1,1,1,bgFeverImg.color.a), _colorTransparent, _normalizedfeverTimer);
+                //foreach(Transform t in bgFeverImg.transform){if(t.GetComponent<Image>()!=null){t.GetComponent<Image>().color=Color.Lerp(new Color(1,1,1,bgFeverImg.color.a), _colorTransparent, _normalizedfeverTimer);}}
+            }
+            float _normalizedmugenTimer=(_feverTimer-_mugenStartFeverTime)/(secBetweenBeats*3);
+            if(comboStatus==-2){
+                bgMugenImg.color=Color.Lerp(new Color(1,1,1,bgMugenImg.color.a), Color.white, _normalizedfeverTimer);
+            }else{
+                bgMugenImg.color=Color.Lerp(new Color(1,1,1,bgMugenImg.color.a), _colorTransparent, _normalizedfeverTimer);
+            }
         }else{SetBGLoop(bgLoopCurrentId);}
 
         //Combo bar
@@ -112,19 +128,16 @@ public class RhythmManager : MonoBehaviour{
                 _comboBarGekkaFillTarget=1;
                 var _stepFill=Time.fixedDeltaTime;
                 float _feverPowerNormalized=(float)(feverPower-0)/(float)(feverPowerMax-0);
-                //comboBarFill.fillAmount=Mathf.Clamp(Mathf.MoveTowards(comboBarFill.fillAmount,_feverPowerNormalized,_stepFill),0f,1f);
-                float _x=Mathf.Lerp(0.3f, 0.94f, _feverPowerNormalized);
+                float _x=Mathf.Lerp(0.3f, 0.94f, _feverPowerNormalized);//Between 0.3 and 0.94 to accomodate for the empty space in sprite
                 comboBarFill.fillAmount=Mathf.Clamp(Mathf.MoveTowards(comboBarFill.fillAmount,_x,_stepFill),0f,1f);
-                if(feverPower>=feverPowerMax){comboBarFillFull.gameObject.SetActive(true);}else{comboBarFillFull.gameObject.SetActive(false);}
+                
+                var _stepAlpha=Time.fixedDeltaTime*5;
+                if(feverPower>=feverPowerMax){comboBarFillFull.gameObject.SetActive(true);comboBarFillFull.color=Color.Lerp(comboBarFillFull.color,Color.white,_stepAlpha);}
+                else{comboBarFillFull.gameObject.SetActive(false);comboBarFillFull.color=_colorTransparent;}
                 //Debug.Log(comboBarFill.fillAmount+" | "+_feverPowerNormalized);
             }else if(comboStatus==-2){
                 comboBarText.text="Mūgen";
                 comboBarMugen.gameObject.SetActive(true);
-                //comboBarFillFull.gameObject.SetActive(true);
-                /*var _stepFill=Time.fixedDeltaTime;
-                float _feverPowerNormalized=(float)(feverPower-0)/(float)(feverPowerMax-0);
-                float _x=Mathf.Lerp(0.3f, 0.94f, _feverPowerNormalized);
-                comboBarFill.fillAmount=Mathf.Clamp(Mathf.MoveTowards(comboBarFill.fillAmount,_x,_stepFill),0f,1f);*/
             }
         }else{if(_comboBarPosTarget!=comboBarPosHidden)_comboBarPosTarget=comboBarPosHidden;}
         var _stepFillGekka=Time.fixedDeltaTime;
@@ -329,6 +342,7 @@ public class RhythmManager : MonoBehaviour{
             _lockinCombo=true;
             specialSound.Start();
             comboBarMugen.gameObject.SetActive(true);
+            _mugenStartFeverTime=_feverTimer;
         }
     }
 
